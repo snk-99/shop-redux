@@ -7,25 +7,33 @@ export function pluralize(name, count) {
 
 export function idbPromise(storeName, method, object) {
   return new Promise((resolve, reject) => {
+
+    // connection to the database `shop-shop` with the version of 1
     const request = window.indexedDB.open('shop-shop', 1);
+
+    // create variables to hold reference to the database, transaction (tx), and object store
     let db, tx, store;
-    request.onupgradeneeded = function(e) {
+
+    // if version has changed (or if this is the first time using the database), run this method and create the three object stores 
+    request.onupgradeneeded = function (e) {
       const db = request.result;
       db.createObjectStore('products', { keyPath: '_id' });
       db.createObjectStore('categories', { keyPath: '_id' });
       db.createObjectStore('cart', { keyPath: '_id' });
     };
 
-    request.onerror = function(e) {
+    // handle any errors with connecting
+    request.onerror = function (e) {
       console.log('There was an error');
     };
 
-    request.onsuccess = function(e) {
+    // on database open success
+    request.onsuccess = function (e) {
       db = request.result;
       tx = db.transaction(storeName, 'readwrite');
       store = tx.objectStore(storeName);
 
-      db.onerror = function(e) {
+      db.onerror = function (e) {
         console.log('error', e);
       };
 
@@ -36,7 +44,7 @@ export function idbPromise(storeName, method, object) {
           break;
         case 'get':
           const all = store.getAll();
-          all.onsuccess = function() {
+          all.onsuccess = function () {
             resolve(all.result);
           };
           break;
@@ -48,7 +56,7 @@ export function idbPromise(storeName, method, object) {
           break;
       }
 
-      tx.oncomplete = function() {
+      tx.oncomplete = function () {
         db.close();
       };
     };
