@@ -2,7 +2,6 @@ import React from 'react';
 import ApolloClient from 'apollo-boost';
 // import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloProvider } from "@apollo/client";
-
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Home from './pages/Home';
@@ -15,19 +14,6 @@ import Nav from './components/Nav';
 import Success from './pages/Success';
 import OrderHistory from './pages/OrderHistory';
 
-// const httpLink = createHttpLink({
-//   uri: '/graphql',
-// });
-
-// const authLink = setContext((_, { headers }) => {
-//   const token = localStorage.getItem('id_token');
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : '',
-//     },
-//   };
-// });
 
 const client = new ApolloClient({
   request: (operation) => {
