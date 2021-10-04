@@ -27,6 +27,11 @@
  ## Mock up
  ![The user checks out by going to their shopping cart.](./Assets/mockup.gif)
 
+ ## Links
+ [Deployed link ](https://desolate-spire-40523.herokuapp.com/)
+
+ [Repository](https://github.com/snk-99/shop-redux)
+
   ## Questions
   Contact me for any questions!!
   * Contact Email: kahurasamuel@gmail.com
